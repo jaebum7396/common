@@ -1,0 +1,31 @@
+//core build.gradle
+dependencies {
+    //common
+    api 'org.springframework.boot:spring-boot-starter'
+    api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-devtools'
+
+    //dateTime format 처리를 위한 종속성
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+
+    //sercurity
+    api 'org.springframework.boot:spring-boot-starter-security'
+    api group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    api group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    api group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+    //swagger
+    api 'io.springfox:springfox-boot-starter:3.0.0'
+}
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+test {
+    useJUnitPlatform()
+}
