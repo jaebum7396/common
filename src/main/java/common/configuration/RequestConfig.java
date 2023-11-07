@@ -1,7 +1,7 @@
-package com.common.configuration;
+package common.configuration;
 
+import common.utils.CachedBodyHttpServletWrapper;
 import lombok.extern.slf4j.Slf4j;
-import com.common.utils.CachedBodyHttpServletWrapper;
 import org.springframework.stereotype.Component;
 
 import jakarta.servlet.*;

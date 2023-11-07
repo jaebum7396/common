@@ -1,4 +1,4 @@
-package com.common.utils;
+package common.utils;
 
 import lombok.SneakyThrows;
 import org.springframework.util.StreamUtils;

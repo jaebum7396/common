@@ -1,7 +1,7 @@
-package com.common;
+package common;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import com.common.model.Response;
+import common.model.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -15,7 +15,6 @@ import java.util.Map;
 @RestControllerAdvice
 public class ErrorResponseAdvice {
 	//private Logger logger = LoggerFactory.getLogger(ErrorResponseAdvice.class);
-	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Response> handleException(Exception e) {
 		Response responseResult;
@@ -33,14 +32,11 @@ public class ErrorResponseAdvice {
         responseResult = Response.builder()
                 .message("인증되지 않은 사용자입니다.")
                 .result(resultMap).build();
-        return ResponseEntity
-				.status(HttpStatus.UNAUTHORIZED)
-				.body(responseResult);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseResult);
 	}
 
 	@ExceptionHandler(ExpiredJwtException.class)
 	public ResponseEntity<Response>  handleExpiredJwtException(ExpiredJwtException e) {
-		System.out.println("ExpiredJwtException");
 		Response responseResult;
 		Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 		responseResult = Response.builder()

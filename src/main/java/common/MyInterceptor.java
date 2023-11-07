@@ -1,8 +1,8 @@
-package com.common;
+package common;
 
 import lombok.extern.slf4j.Slf4j;
-import com.common.utils.CachedBodyHttpServletWrapper;
-import com.common.utils.CommonUtils;
+import common.utils.CachedBodyHttpServletWrapper;
+import common.utils.CommonUtils;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
