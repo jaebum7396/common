@@ -1,6 +1,6 @@
 package common.model;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +11,8 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 public class Response {
-    @ApiModelProperty(value="성공하였습니다", example="성공")
+    @Schema(example="성공")
     String message;
-    @ApiModelProperty(value="{model}", example="model")
+    @Schema(example="result")
     Map<String,Object> result;
 }

@@ -9,13 +9,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-	@Value("${cloud.gateway.uri}")
-	String GATEWAY_URI;
+	/*@Value("${cloud.gateway.uri}")
+	String GATEWAY_URI;*/
 	@Value("${spring.profiles.active}")
 	String ACTIVE_PROFILE;
 	@Override
 	public void addInterceptors(InterceptorRegistry reg) {
-		reg.addInterceptor(new MyInterceptor(GATEWAY_URI, ACTIVE_PROFILE))
+		reg.addInterceptor(new MyInterceptor(
+				ACTIVE_PROFILE
+				//, GATEWAY_URI
+		))
 			.addPathPatterns("/*")
 			.excludePathPatterns("/css/**", "/images/**", "/js/**");
 	}
@@ -23,7 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry registry) {
 		if(ACTIVE_PROFILE.equals("local")) {
 			registry.addMapping("/**") // 모든 경로에 대해 CORS 설정 적용
-				.allowedOrigins(GATEWAY_URI) // 허용할 도메인을 allowedOrigins에 지정
+				//.allowedOrigins(GATEWAY_URI) // 허용할 도메인을 allowedOrigins에 지정
 				.allowedOrigins("http://localhost:3000") // 허용할 도메인을 allowedOrigins에 지정
 				.allowedMethods("*") // 허용할 HTTP 메서드 설정
 				.allowedHeaders("*") // 허용할 헤더 설정

@@ -13,11 +13,14 @@ import java.util.Enumeration;
 
 @Slf4j
 public class MyInterceptor implements HandlerInterceptor{
-	private final String GATEWAY_URI;
+	//private final String GATEWAY_URI;
 	private final String ACTIVE_PROFILE;
-	public MyInterceptor(String GATEWAY_URI, String ACTIVE_PROFILE) {
-		this.GATEWAY_URI = GATEWAY_URI;
+	public MyInterceptor(
+			String ACTIVE_PROFILE
+			//, String GATEWAY_URI
+	) {
 		this.ACTIVE_PROFILE = ACTIVE_PROFILE;
+		//this.GATEWAY_URI = GATEWAY_URI;
 	}
 
 	@Override
@@ -34,22 +37,22 @@ public class MyInterceptor implements HandlerInterceptor{
 		String requestUri = request.getHeader("x-forwarded-host");
 
 		System.out.println("ACTIVE_PROFILE : " + ACTIVE_PROFILE);
-		System.out.println("GATEWAY_URI : " + GATEWAY_URI);
 		if(ACTIVE_PROFILE.equals("local")) {
 			log.info("로컬에서 실행중입니다.");
 			//GATEWAY_URI = "http://localhost:8080";
-		}else{
+		}
+		/*else{
 			System.out.println("요청_URI : " + requestUri);
 			if(("".equals(requestUri)||requestUri == null||!requestUri.equals(GATEWAY_URI))) {
 				throw new BadCredentialsException("잘못된 접근입니다.");
 			}
-		}
+		}*/
 
 		// 요청 본문을 읽고 출력합니다.
-		final CachedBodyHttpServletWrapper cachingRequest = (CachedBodyHttpServletWrapper) request;
+		/*final CachedBodyHttpServletWrapper cachingRequest = (CachedBodyHttpServletWrapper) request;
 		String requestBodyStr = "";
 		requestBodyStr = CommonUtils.readRequestBody(cachingRequest);
-		System.out.println("requestBody : " + requestBodyStr); // 요청 본문 내용을 출력합니다.
+		System.out.println("requestBody : " + requestBodyStr); // 요청 본문 내용을 출력합니다.*/
 
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}

@@ -11,13 +11,11 @@ import java.io.*;
 
 public class CachedBodyHttpServletWrapper extends HttpServletRequestWrapper {
     private byte[] cachedBody;
-
     public CachedBodyHttpServletWrapper(HttpServletRequest request) throws IOException {
         super(request);
         InputStream requestInputStream = request.getInputStream();
         this.cachedBody = StreamUtils.copyToByteArray(requestInputStream);
     }
-
     @Override
     public ServletInputStream getInputStream() throws IOException {
         return new CachedBodyServletInputStream(this.cachedBody);
@@ -39,22 +37,18 @@ public class CachedBodyHttpServletWrapper extends HttpServletRequestWrapper {
         public CachedBodyServletInputStream(byte[] cachedBody) {
             this.cachedBodyInputStream = new ByteArrayInputStream(cachedBody);
         }
-
         @SneakyThrows
         @Override
         public boolean isFinished() {
             return cachedBodyInputStream.available() == 0;
         }
-
         @Override
         public boolean isReady() {
             return true;
         }
-
         @Override
         public void setReadListener(ReadListener readListener) {
         }
-
         @Override
         public int read() throws IOException {
             return cachedBodyInputStream.read();

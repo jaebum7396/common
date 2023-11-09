@@ -47,11 +47,18 @@ public class CommonUtils {
         try{
             Key secretKey = Keys.hmacShaKeyFor(JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8));
             Claims claim = Jwts.parserBuilder().setSigningKey(secretKey).build()
-                    .parseClaimsJws(request.getHeader("authorization")).getBody();
+                    .parseClaimsJws(
+                            request
+                                .getHeader("authorization")
+                                .replace("Bearer","")
+                                .trim()).getBody();
             return claim;
         } catch (ExpiredJwtException e) {
+            System.out.println("ExpiredJwtException");
+            e.printStackTrace();
             throw new ExpiredJwtException(null, null, "로그인 시간이 만료되었습니다.");
         } catch (Exception e) {
+            System.out.println("Exception");
             throw new BadCredentialsException("인증 정보에 문제가 있습니다.");
         }
     }
