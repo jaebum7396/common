@@ -8,7 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
+//import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -59,7 +59,8 @@ public class CommonUtils {
             throw new ExpiredJwtException(null, null, "로그인 시간이 만료되었습니다.");
         } catch (Exception e) {
             System.out.println("Exception");
-            throw new BadCredentialsException("인증 정보에 문제가 있습니다.");
+            throw new ExpiredJwtException(null, null, "인증 정보에 문제가 있습니다.");
+            //throw new BadCredentialsException("인증 정보에 문제가 있습니다.");
         }
     }
 
