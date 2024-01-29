@@ -40,6 +40,7 @@ public class MyInterceptor implements HandlerInterceptor{
 		String requestUri = request.getHeader("x-forwarded-host");
 
 		System.out.println("ACTIVE_PROFILE : " + ACTIVE_PROFILE);
+		System.out.println("GATEWAY_URI : " + GATEWAY_URI);
 		if(ACTIVE_PROFILE.equals("local")) {
 			log.info("로컬에서 실행중입니다.");
 			//GATEWAY_URI = "http://localhost:8080";
